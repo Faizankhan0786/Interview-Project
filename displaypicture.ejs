@@ -1,0 +1,11 @@
+<html>
+<center>
+    <form action='/customer/editpicture' method='post' enctype="multipart/form-data" >
+        <input type='hidden' value="<%=cid %>" name="cid">
+        <img src='/images/<%=picture %>' width='200' height='200'><br><br>
+        <b>Browse Image to Edit Picture</b><br><br>
+        <input type='file' name='picture' required>
+        <input type="submit" value="Edit Picture">
+    </form>
+</center>
+</html>

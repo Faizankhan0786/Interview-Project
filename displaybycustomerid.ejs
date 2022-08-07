@@ -1,0 +1,140 @@
+<style type="text/css">
+    .root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    height: 100%;
+    }
+    .subdiv{
+     width: 600px;
+     height: auto;
+    margin-top: 20px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid black
+    }
+    .gap{
+      margin-bottom: 20px;
+    
+    }
+    
+    
+    </style>
+    
+    
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <script src='/javascripts/project.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    </head>
+    
+     <form action="/customer/editdeletecustomer">
+    <div class="root">
+        <input type="hidden" value="<%=data[0].customerid %>" name="cid">
+        
+        <div class="subdiv">
+           <div class="row">
+             <h5>Customer Interface[Update/Delete]</h5>
+             <% var name=data[0].customername.split(' ') %>
+             </div>
+           
+           <div class="form-row gap">
+                <div class="col">
+                <input type="text" class="form-control" placeholder="First Name"  name='firstname' value="<%=name[0] %>">
+                </div>
+                <div class="col">
+                <input type="text" class="form-control" placeholder="Last Name"  name='lastname'  value="<%=name[1] %>">
+                 </div> 
+             </div>
+             <% if(data[0].gender=="Male"){ %>
+             <div class="form-row gap">
+             <div class="col" style="display: flex; justify-content: center; align-items: center;">
+              <input type="radio"  value="Male" name="gender" checked><i class="fas fa-male" style="margin-left: 10px; margin-right: 30px; font-size: 20px; color: darkviolet;" ></i>
+              <input type="radio"  value="Female" name="gender"><i class="fas fa-female" style="margin-left: 10px; margin-right: 10px; font-size: 20px; color: deeppink;"></i>
+             </div>
+           <% } else {%> 
+            <div class="form-row gap">
+                <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                 <input type="radio"  value="Male" name="gender" ><i class="fas fa-male" style="margin-left: 10px; margin-right: 30px; font-size: 20px; color: darkviolet;" ></i>
+                 <input type="radio"  value="Female" name="gender" checked><i class="fas fa-female" style="margin-left: 10px; margin-right: 10px; font-size: 20px; color: deeppink;"></i>
+                </div>
+            <%} %>
+            
+            <% 
+              var bd=new Date(data[0].dob)
+              d=bd.getDate()
+              m=bd.getMonth()+1
+              y=bd.getFullYear()
+              if(d>=1 && d<=9)
+              {d="0"+d}
+              if(m>=1 && m<=9)
+              {m="0"+m}
+              tdb=y+"-"+m+"-"+d 
+              
+            %>
+    
+
+
+        <div class="col">
+            <input type="date" value="<%=tdb %>" class="form-control" placeholder="Birth Date"  name='birthdate'>
+    
+         </div>
+    
+    
+        </div>
+    
+        <div class="form-row gap">
+            <div class="col">
+            <input type="email" value="<%=data[0].emailaddress %>" class="form-control" placeholder="Email Address"  name='email'>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Mobile Number" value="<%=data[0].mobileno %>"  name='mobileno'>
+            </div> 
+         </div>
+    <div class="form-row gap">
+         <input type="text" class="form-control" placeholder="Address" value="<%=data[0].address %>" name='address'>
+            </div>
+    
+            <div class="form-row gap">
+                <div class="col">
+                    <select name="state" id='state' class="form-control">
+                    
+                    <option value='<%=data[0].state %>'><%=data[0].sname%></option>
+                    </select>
+                    </div>
+                    <div class="col">
+                         <select name="city" id="city" class="form-control">
+                         
+                         <option value='<%=data[0].city %>'><%=data[0].cname%></option>
+                         </select>
+                   </div>
+                    </div>
+                
+                   
+                    
+    
+                    <div class="form-row gap">
+                         <input type="password" class="form-control" placeholder="Password"    value="<%=data[0].password %>"  name='password'>
+                            </div>
+            
+                   
+                    <div class="form-row gap">
+                            <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                                <button type="submit" value='Edit' name='btn' class="btn btn-primary" style="width: 150px;">Edit</button>
+                            </div>
+                            <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                                <button type="submit" value="Delete" name="btn" class="btn btn-primary"  style="width: 150px;">Delete</button>
+                            </div> 
+                    </div>
+                    
+    </div>
+    </div>
+    </form>
+    </html>
